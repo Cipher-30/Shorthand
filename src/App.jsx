@@ -9,7 +9,6 @@ function App() {
   return (
     <>
      <p>hello there!!</p>
-     <p>commit 1</p>
     </>
   )
 }
