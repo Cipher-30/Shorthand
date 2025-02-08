@@ -10,6 +10,7 @@ function App() {
     <>
      <p>hello there!!</p>
      <p>commit 1</p>
+     <p>commit 2</p>
     </>
   )
 }
