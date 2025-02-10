@@ -59,13 +59,32 @@ function App() {
 
    }
 
-
+ // getting text in HTML FORMATE
   function getHTMLcontent ()
   {
     const html = quillRef.current.getSemanticHTML();
     console.log(html);
+  }
+
+ // insert Date
+  function insertDate () {
+    //getting current date
+    const date = new Date().toLocaleDateString("en-GB");
+     const position  = getCursorPosition()
+    quillRef.current.insertText(position.index,date);
     
   }
+
+  // gives the cursor postion
+  function getCursorPosition() {
+    const position = quillRef.current.getSelection();
+    console.log(position);
+    // console.log(position.index);
+    return position;
+  }
+
+
+  
 
 
   useEffect(() => {
@@ -95,6 +114,8 @@ function App() {
       <button onClick={getEditorContent}> Editor Content </button>
       <button onClick={insertContent}> Insert Content </button>
       <button onClick={getHTMLcontent}> HTML Content </button>
+    <button onClick={insertDate}> Date</button>
+    <button onClick={getCursorPosition}> Cursor Position</button>
     </>
   );
 }
