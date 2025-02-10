@@ -82,6 +82,62 @@ function App() {
     // console.log(position.index);
     return position;
   }
+ 
+  //content from clipboard
+  function getClipboard () {
+    let data ;
+     navigator.clipboard.readText()
+      .then ( (text) => { console.log(text);
+              data  = text; })
+      .catch( (err) => { console.error("Failed to read clipboard:", err)})
+
+       return data;
+  
+
+  }
+
+
+
+  function pasteClipboardText() {
+    if (!quillRef.current) {
+      console.error("Quill editor is not initialized.");
+      return;
+    }
+  
+    navigator.clipboard.readText().then((clipboardText) => {
+      if (!clipboardText) {
+        console.warn("Clipboard is empty.");
+        return;
+      }
+   
+      //current cursor position
+      const selection = quillRef.current.getSelection(); 
+  
+      // Fallback to end
+      const index = selection ? selection.index : quillRef.current.getLength(); 
+  
+      // Insert clipboard text
+      quillRef.current.insertText(index, clipboardText); 
+
+    }).catch((err) => {
+      console.error("Failed to read clipboard:", err);
+    });
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   
@@ -116,6 +172,13 @@ function App() {
       <button onClick={getHTMLcontent}> HTML Content </button>
     <button onClick={insertDate}> Date</button>
     <button onClick={getCursorPosition}> Cursor Position</button>
+    <button onClick={getClipboard} > clipboard</button>         
+
+
+
+    <div>
+      <button onClick={pasteClipboardText}>Paste clipboard</button>
+    </div>
     </>
   );
 }
